@@ -73,6 +73,19 @@ class CategoryController {
         return res.status(200).json();
     }
 
+    async delete(req, res) {
+        const { id } = req.params;
+        const category = await Category.findByPk(id);
+
+        if (!category) {
+            return res.status(404).json({ error: "make  sure your product ID is correct" });
+        }
+
+        await category.destroy();
+
+        return res.status(200).json();
+    }
+
 }
 
 export default new CategoryController();
